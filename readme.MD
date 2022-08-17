@@ -7,7 +7,7 @@ This prediction model is created based on character level LSTM model built using
 </p>
 
 ## Deployment
-To set up the app, clone the repo and install the requirements. 
+To set up the script, clone the repo and install the requirements. 
 ```
 # clone repository
 git clone https://github.com/jamesnzeex/gender_prediction.git
@@ -32,3 +32,5 @@ Output:
 # to retrain model
 python serve.py -r
 ```
+
+Refer to [here](https://huggingface.co/spaces/jamesnzeex/gender_prediction) for demo of the script in action
