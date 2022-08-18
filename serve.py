@@ -9,7 +9,7 @@ from flask import Flask, jsonify, request
 from tensorflow.keras.models import load_model
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-r','--retrain', default=False, action='store_true', help="retrain model")
+parser.add_argument("-r", "--retrain", default=False, action='store_true', help="retrain model")
 parser.add_argument("-d", "--deploy", default=False, action='store_true', help="deploy flask app")
 parser.add_argument("-n", "--name", default=[], nargs='+', help="name(s) to be predicted")
 args = parser.parse_args()
@@ -24,7 +24,7 @@ def pred(name):
     df = utils.preprocess(df, train=False)
     result = model.predict(np.asarray(df['name'].values.tolist())).squeeze(axis=1)
     df['gender'] = ['Male' if logit > 0.5 else 'Female' for logit in result]
-    df['Probability'] = [logit if logit > 0.5 else 1.0 - logit for logit in result]
+    df['probability'] = [logit if logit > 0.5 else 1.0 - logit for logit in result]
     gender_prediction = dict(zip(name, df['gender'].to_list()))
     print (gender_prediction)
     return(gender_prediction)
@@ -41,7 +41,7 @@ def predict():
     df = utils.preprocess(df, train=False)
     result = model.predict(np.asarray(df['name'].values.tolist())).squeeze(axis=1)
     df['gender'] = ['Male' if logit > 0.5 else 'Female' for logit in result]
-    df['Probability'] = [logit if logit > 0.5 else 1.0 - logit for logit in result]
+    df['probability'] = [logit if logit > 0.5 else 1.0 - logit for logit in result]
     gender_prediction = dict(zip(name, df['gender'].to_list()))
     return jsonify(gender_prediction)
 
