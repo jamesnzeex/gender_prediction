@@ -18,6 +18,9 @@ cd gender_prediction
 # install requirements
 pip install -r requirements.txt
 
+# to retrain model
+python serve.py -r
+
 # to predict gender given first name of person
 python serve.py -n "Alan" "Bobby" "Celine"
 Output:
@@ -29,8 +32,9 @@ curl -X POST -d '{"name": ["Alan", "Bobby", "Celine"]}' http://127.0.0.1:5000/ -
 Output:
 {"Alan":"Male","Bobby":"Male","Celine":"Female"}
 
-# to retrain model
-python serve.py -r
+# deploy via docker
+docker build -t gp_flask .
+docker run gp_flask
 ```
 
 Refer to [here](https://huggingface.co/spaces/jamesnzeex/gender_prediction) for demo of the script in action
